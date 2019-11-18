@@ -1,5 +1,5 @@
 # LiveComposition
 Final Project for CS50
 
-## Contributers
+## Contributors
 1. Kevin Huang
