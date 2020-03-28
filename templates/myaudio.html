@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Audio Files - MelodyMaker
+{% endblock %}
+
+{% block main %}
+    {% if rows %}
+        <div>
+            <form method=post enctype=multipart/form-data>
+                <input type="file" name="file" id="fileAudio">
+                <input type=submit value="Upload File">
+            </form>
+            <br>
+            <audio id="player1" controls></audio>
+        </div>
+        <br>
+        <table class="table">
+            <tr>
+                <th>File Name</th>
+                <th>Date Created</th>
+            </tr>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row["audio_url"] }}</td>
+                <td>{{ row["time"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <script src="{{ url_for('static',filename='main.js') }}"></script>
+    {% else %}
+        <h2>You have no saved audio files. Go make one!</h2>
+        <br>
+        <div>
+            <form method=post enctype=multipart/form-data>
+                <input type="file" name="file" id="fileAudio">
+                <input type=submit value="Upload File">
+            </form>
+            <br>
+            <audio id="player1" controls></audio>
+        </div>
+        <script src="{{ url_for('static',filename='main.js') }}"></script>
+    {% endif %}
+{% endblock %}

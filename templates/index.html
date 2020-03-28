@@ -5,8 +5,60 @@
 {% endblock %}
 
 {% block main %}
-    <p>
-        Homepage for non-logged in users.
-    </p>
-    <a href = "/register">Register</a>
+    {% if session.user_id %}
+        <div id="controls">
+            <h3>Record Audio:</h3>
+            <p><input type="text" placeholder="filename" id="filename"> .wav</p>
+            <button id="recordButton">Record</button>
+            <button id="stopButton" disabled>Stop</button>
+            <pre id="log"></pre>
+            <audio id="player2" controls></audio>
+            <br>
+            <button id="uploadButton" disabled=true>Upload Recording</button>
+        </div>
+        <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+        <script src="{{ url_for('static',filename='WebAudioRecorder.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='recorder.js') }}"></script>
+        <script src="{{ url_for('static',filename='main.js') }}"></script>
+    {% else %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="{{ url_for('static',filename='parallax.min.js') }}"></script>
+        <h1>
+            Welcome to MelodyMaker
+        </h1>
+        <div class = "container">
+            <br>
+
+            <div class="parallax" data-parallax="scroll"
+                 data-z-index="1" data-image-src="{{ url_for('static',filename='piano.jpeg') }}"></div>
+            <br>
+            <br>
+            <h2> MelodyMaker is a tool for music composers that allows you to display your
+                 recordings as sheet music.
+
+            </h2>
+            <br>
+            <br>
+            <div class="parallax" data-parallax="scroll"
+                 data-z-index="1" data-image-src="{{ url_for('static',filename='notes.png') }}"></div>
+            <br>
+            <br>
+            <h2> You can record music directly on the website or upload music files saved on your computer.
+
+            </h2>
+            <br>
+            <br>
+             <div class="parallax" data-parallax="scroll"
+                 data-z-index="1" data-image-src="{{ url_for('static',filename='musescore.png') }}"></div>
+            <br>
+            <br>
+            <h2> The website is compatible with the sheet music program Musescore,
+                allowing you to edit your music after the sheet music has been uploaded.
+
+            </h2>
+            <br>
+        </div>
+        <a href="/register" class="link">Register Now!</a>
+
+    {% endif %}
 {% endblock %}
